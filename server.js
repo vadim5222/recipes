@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const mongoose = require('./db')
 const port = 3000;
 
 app.use(express.json())
