@@ -11,7 +11,7 @@ const RecipesScheme = mongoose.Schema(
       required: [true, 'Введите категорию (например: Суп, салат и тд.)']
     },
     description:{
-      type: Text,
+      type: String,
       required: [true, 'Пожалуйста введите описание рецепта']
     }
   },
