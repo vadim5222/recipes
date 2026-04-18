@@ -23,7 +23,3 @@ dist-ssr
 *.sln
 *.sw?
 
-backend/.venv/
-__pychache__/
-*.pyc
-*.pyo
