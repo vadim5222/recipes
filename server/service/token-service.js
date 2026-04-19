@@ -11,6 +11,23 @@ class TokenService {
             refreshToken
         }
     }
+
+    validatAccessToken(token){
+        try{
+
+        } catch (e){
+
+        }
+    }
+
+    validateRefreshToken(token){
+        try{
+
+        } catch (e){
+            
+        }
+    }
+
     async saveToken(userId, refreshToken) {
         const tokenData = await tokenModel.findOne({user: userId})
         if (tokenData) {
@@ -19,6 +36,11 @@ class TokenService {
         }
         const token = await tokenModel.create({user: userId ,refreshToken})
         return token
+    }
+
+    async removeToken(refreshToken){
+        const tokenData = await tokenModel.deleteOne({refreshToken})
+        return tokenData
     }
 }
 
