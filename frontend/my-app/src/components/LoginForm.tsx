@@ -6,7 +6,7 @@ const LoginForm: FC = () => {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>('')
-    const [role, setRole] = useState<string>('guest')
+    const [role, setRole] = useState<string>('')
     const {store} = useContext(Context)
     
     return(
@@ -30,6 +30,7 @@ const LoginForm: FC = () => {
             value={role}
             aria-placeholder='Выберите роль'
             >
+                <option value=''>Выберите роль</option>
                 <option value='guest'>Гость</option>
                 <option value='user'>Пользователь</option>
             </select>
