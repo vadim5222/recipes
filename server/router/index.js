@@ -9,8 +9,8 @@ const roleMiddleware = require('../middlewares/role-middleware')
 router.post('/registration', 
     body('email').isEmail(),
     body('password').isLength({min:3, max:32}),
+    body('role').optional(),
     userController.registration)
-    body('role').optional()
 
 
 

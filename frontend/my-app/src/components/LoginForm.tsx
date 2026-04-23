@@ -6,6 +6,7 @@ const LoginForm: FC = () => {
 
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>('')
+    const [role, setRole] = useState<string>('guest')
     const {store} = useContext(Context)
     
     return(
@@ -24,8 +25,16 @@ const LoginForm: FC = () => {
             placeholder="Password" 
             
             />
+            <select
+            onChange={e => setRole(e.target.value)}
+            value={role}
+            aria-placeholder='Выберите роль'
+            >
+                <option value='guest'>Гость</option>
+                <option value='user'>Пользователь</option>
+            </select>
             <button onClick={() => store.login(email, password)}>Логин</button>
-            <button onClick={() => store.registration(email, password)}>Регистрация</button>
+            <button onClick={() => store.registration(email, password, role)}>Регистрация</button>
         </div>
     )
 }
