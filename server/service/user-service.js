@@ -8,17 +8,17 @@ const ApiError = require('../exceptions/api-error')
 const userModel = require('../models/user-model')
 
 class UserService {
-    async registration(email, password, role){
-        const candidate = await UserModel.findOne({email})
+    async registration(username, email, password, role){
+        const candidate = await UserModel.findOne({$or: [{username}, {email}]})
         if (candidate){
-            throw ApiError.BadRequest(`Пользователь с таким почтовым индексом ${email} уже есть`)
+            throw ApiError.BadRequest(`Пользователь с таким никнеймом или почтой уже есть`)
         }
         const hashPassword = await bcrypt.hash(password, 3)
         const activationLink = uuid.v4()
         role = role || 'user'
 
 
-        const user = await UserModel.create({email, password: hashPassword, activationLink, role})
+        const user = await UserModel.create({username, email, password: hashPassword, activationLink, role})
         await MailService.sendActivationMail(email, `${process.env.API_URL}/api/activate/${activationLink}`)
         const userDto = new UserDto(user)
         const tokens = tokenService.generateTokens({...userDto})
