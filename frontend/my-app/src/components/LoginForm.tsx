@@ -3,12 +3,20 @@ import { Context } from "../index";
 import {observer} from "mobx-react-lite";
 
 const LoginForm: FC = () => {
+    const [username, setUsername] = useState<string>('')
     const [email, setEmail] = useState<string>("")
     const [password, setPassword] = useState<string>('')
+    const [role, setRole] = useState<string>('')
     const {store} = useContext(Context)
     
     return(
         <div>
+            <input 
+            onChange={e => setUsername(e.target.value)}
+            value={username}
+            type="text" 
+            placeholder="Username"
+            />
 
             <input 
             onChange={e => setEmail(e.target.value)}
@@ -24,7 +32,17 @@ const LoginForm: FC = () => {
             placeholder="Password" 
             
             />
+            <select
+            onChange={e => setRole(e.target.value)}
+            value={role}
+            aria-placeholder='Выберите роль'
+            >
+                <option value=''>Выберите роль</option>
+                <option value='guest'>Гость</option>
+                <option value='user'>Пользователь</option>
+            </select>
             <button onClick={() => store.login(email, password)}>Логин</button>
+            <button onClick={() => store.registration(username, email, password, role)}>Регистрация</button>
         </div>
     )
 }
