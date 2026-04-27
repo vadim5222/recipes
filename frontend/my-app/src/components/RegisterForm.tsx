@@ -40,6 +40,8 @@ const RegisterForm = () => {
             <option value="user">Пользователь</option>
             <option value="guest">Гость</option>
         </select>
+
+        <button onClick={() => store.registration(username, email, password, role)}>Зарегистрироваться</button>
         </>
     )
 }
