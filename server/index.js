@@ -4,6 +4,7 @@ const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const mongoose = require('mongoose')
 const router = require('./router/index')
+const RecipeRouter = require('./router/recipe-router')
 const errorMiddleware = require('./middlewares/error-middleware')
 
 
@@ -18,6 +19,7 @@ app.use(cors({
     origin: process.env.CLIENT_URL
 }))
 app.use('/api', router)
+app.use('/api', RecipeRouter)
 app.use(errorMiddleware)
 
 const start = async () => {

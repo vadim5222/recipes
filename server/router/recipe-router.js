@@ -1,0 +1,7 @@
+const Router = require("express").Router;
+const RecipeController = require('../controllers/recipe-controller')
+const RecipeRouter = new Router
+
+RecipeRouter.post('/create-recipe', RecipeController.CreateRecipe)
+
+module.exports = RecipeRouter
