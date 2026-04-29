@@ -17,6 +17,17 @@ class RecipeService{
             recipe: recipeDto
         }
     }
+
+
+    async DeleteRecipe(id){
+        const ExistingRecipe = await RecipeModel.findByIdAndDelete(id)
+        if (!ExistingRecipe){
+            throw ApiError.BadRequest('Такого рецепта нету')
+        }
+        const recipes = await RecipeModel.find()
+        return recipes
+    }
+
     async getRecipes(){
         const recipes = await recipeModel.find()
         return recipes

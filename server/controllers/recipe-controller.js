@@ -11,6 +11,17 @@ class RecipeController {
             next(e)
         }
     }
+
+    async DeleteRecipe(req, res, next){
+        try{
+            const {id} = req.params
+            const recipe = await recipeService.DeleteRecipe(id)
+            res.json('Рецепт успешно удален')
+        } catch(e){
+            next(e)
+        }
+    }
+
     async getRecipes(req, res, next){
         try{
             const recipes = await recipeService.getRecipes()
