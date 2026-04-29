@@ -1,6 +1,7 @@
 const RecipeModel = require('../models/recipe-model')
 const ApiError = require('../exceptions/api-error')
 const RecipeDto = require('../dtos/recipe-dto')
+const recipeModel = require('../models/recipe-model')
 
 
 class RecipeService{
@@ -15,6 +16,10 @@ class RecipeService{
         return{
             recipe: recipeDto
         }
+    }
+    async getRecipes(){
+        const recipes = await recipeModel.find()
+        return recipes
     }
 }
 
