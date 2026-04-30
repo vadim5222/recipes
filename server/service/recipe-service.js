@@ -39,6 +39,14 @@ class RecipeService{
         const recipes = await recipeModel.find()
         return recipes
     }
+
+    async getOneRecipe(id){
+        const recipe = await RecipeModel.findById(id)
+        if (!recipe){
+            throw ApiError.BadRequest('Такого рецепта нету')
+        }
+        return recipe
+    }
 }
 
 module.exports = new RecipeService()

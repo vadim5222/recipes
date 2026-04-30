@@ -41,6 +41,16 @@ class RecipeController {
             next(e)
         }
     }
+
+    async getOneRecipe(req, res, next){
+        try{
+            const {id} = req.params
+            const recipe = await recipeService.getOneRecipe(id)
+            res.json(recipe)
+        } catch(e){
+            next(e)
+        }
+    }
 }
 
 module.exports = new RecipeController()
