@@ -12,6 +12,17 @@ class RecipeController {
         }
     }
 
+    async UpdateRecipe(req, res, next){
+        try{
+            const {id} = req.params
+            const data = req.body
+            const recipe = await recipeService.UpdateRecipe(id, data)
+            res.json('Рецепт успешно обновлен')
+        } catch(e){
+            next(e)
+        }
+    }
+
     async DeleteRecipe(req, res, next){
         try{
             const {id} = req.params

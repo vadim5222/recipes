@@ -18,6 +18,13 @@ class RecipeService{
         }
     }
 
+    async UpdateRecipe(id, data){
+        const Recipe = await RecipeModel.findByIdAndUpdate(id, {$set: data}, {new:true})
+        if (!Recipe){
+            throw ApiError.BadRequest('такого рецепта нету')
+        }
+        return Recipe
+    }
 
     async DeleteRecipe(id){
         const ExistingRecipe = await RecipeModel.findByIdAndDelete(id)

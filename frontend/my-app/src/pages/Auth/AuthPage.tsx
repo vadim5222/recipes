@@ -5,6 +5,7 @@ import UserService from "../../services/UserService";
 import RegisterPage from '../../pages/RegisterPage';
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom"
 import LoginPage from '../../pages/LoginPage';
+import { observer } from 'mobx-react-lite';
 
 const AuthPage = () => {
     const { store } = useContext(Context)
@@ -51,7 +52,7 @@ const AuthPage = () => {
                                     <div>
                                         <button onClick={getUsers}>Получить список пользователей</button>
                                         {users.map(user =>
-                                            <div key={user.email}>{user.email}</div>)}
+                                            <div key={user.id}>{user.username}</div>)}
                                     </div>
                                 </div>
                             }>
@@ -66,4 +67,4 @@ const AuthPage = () => {
     )
 }
 
-export default AuthPage
+export default observer(AuthPage)
