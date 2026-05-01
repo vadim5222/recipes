@@ -1,12 +1,12 @@
 import { observer } from "mobx-react-lite";
-import AuthPage from './pages/Auth/AuthPage';
+import MainPage from './pages/Main/MainPage';
 
 
 function App() {
 
     return (
         <>
-        <AuthPage/>
+            <MainPage />
         </>
     );
 }
