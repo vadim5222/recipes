@@ -2,24 +2,27 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import Store from './store/store';
+import RecipeStore from "./store/RecipeStore";
 import { createContext } from 'react';
 
 
 interface State {
-  store: Store
+    store: Store
+    recipestore: RecipeStore
 }
 
 const store = new Store()
+const recipestore = new RecipeStore()
 
 export const Context = createContext<State>({
-  store
+  store, recipestore
 })
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-  <Context.Provider value={{store}}>
+  <Context.Provider value={{store, recipestore}}>
     <App/>
   </Context.Provider>
 );

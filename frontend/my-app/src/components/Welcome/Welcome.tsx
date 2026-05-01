@@ -3,6 +3,8 @@ import { Context } from "../../index";
 import { IUser } from "../../models/IUser";
 import UserService from "../../services/UserService";
 import { observer } from 'mobx-react-lite';
+import { Link } from 'react-router-dom';
+import RecipeForm from "../RecipeForm/RecipeForm";
 
 
 const Welcome = () => {
@@ -37,6 +39,7 @@ const Welcome = () => {
                     <button onClick={getUsers}>Получить список пользователей</button>
                     {users.map(user =>
                         <div key={user.id}>{user.username}</div>)}
+                    <RecipeForm/>
                 </div>
             </div>
         </div>
