@@ -1,16 +1,20 @@
 import React, { FC, useContext, useEffect, useState } from 'react';
 import { Context } from "../../index";
 import { IUser } from "../../models/IUser";
+import {IRecipe} from "../../models/IRecipe";
 import UserService from "../../services/UserService";
 import { observer } from 'mobx-react-lite';
 import { Link } from 'react-router-dom';
 import RecipeForm from "../RecipeForm/RecipeForm";
+import RecipeService from "../../services/RecipeService";
 
 
 const Welcome = () => {
 
     const { store } = useContext(Context)
+    const { recipestore } = useContext(Context)
     const [users, setUsers] = useState<IUser[]>([])
+    const [recipes, setRecipes] = useState<IRecipe[]>([])
     useEffect(() => {
         if (localStorage.getItem('token')) {
             store.checkAuth()
@@ -22,6 +26,15 @@ const Welcome = () => {
             const response = await UserService.fetchUsers()
             setUsers(response.data)
         } catch (e: any) {
+            console.log(e)
+        }
+    }
+
+    async function getRecipes() {
+        try {
+            const response = await RecipeService.fetchRecipes()
+            setRecipes(response.data)
+        } catch (e: any){
             console.log(e)
         }
     }
@@ -40,6 +53,9 @@ const Welcome = () => {
                     {users.map(user =>
                         <div key={user.id}>{user.username}</div>)}
                     <RecipeForm/>
+                    <button onClick={getRecipes}>Получить список рецептов</button>
+                    {recipes.map(recipe =>
+                        <div key={recipe._id}>{recipe.title} <button onClick={() => recipestore.DeleteRecipe(recipe._id)}>Удалить</button></div>)}
                 </div>
             </div>
         </div>

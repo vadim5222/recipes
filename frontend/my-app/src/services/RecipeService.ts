@@ -19,8 +19,9 @@ export default class RecipeService {
     static async getOneRecipe(id: string){
         return $api.get<RecipeResponce>(`/recipe-one/${id}`)
     }
+
     
     static fetchRecipes() {
-        return $api.get<IRecipe[]>('/recipes')
+        return $api.get<IRecipe[]>('/recipe-list')
     }
 }
