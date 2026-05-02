@@ -12,7 +12,7 @@ export default class RecipeService {
         return $api.delete<RecipeResponce>(`/recipe-delete/${id}`)   
     }
 
-    static async UpdateRecipe(id: string, data: string){
+    static async UpdateRecipe(id: string, data: Partial<IRecipe>){
         return $api.put<RecipeResponce>(`/recipe-update/${id}`, {data})
     }
 

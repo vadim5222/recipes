@@ -6,6 +6,7 @@ import UserService from "../../services/UserService";
 import { observer } from 'mobx-react-lite';
 import RecipeForm from "../RecipeForm/RecipeForm";
 import RecipeService from "../../services/RecipeService";
+import { data } from 'react-router-dom';
 
 
 const Welcome = () => {
@@ -14,6 +15,9 @@ const Welcome = () => {
     const { recipestore } = useContext(Context)
     const [users, setUsers] = useState<IUser[]>([])
     const [recipes, setRecipes] = useState<IRecipe[]>([])
+    const [showUsers, setShowUsers] = useState(false)
+    const [showRecipes, setShowRecipes] = useState(false)
+
     useEffect(() => {
         if (localStorage.getItem('token')) {
             store.checkAuth()
@@ -48,13 +52,25 @@ const Welcome = () => {
                 <h1>{store.user.isActivated ? 'Аккаунт подтвержден' : 'Подтвердите аккаунт'}</h1>
                 <button onClick={() => store.logout()}>Выйти</button>
                 <div>
-                    <button onClick={getUsers}>Получить список пользователей</button>
-                    {users.map(user =>
+                    <button onClick={async () => {
+                        if(!showUsers){
+                            await getUsers()
+                        }
+                        setShowUsers(prev => !prev)
+                    }}>{showUsers ? 'Скрыть пользователей' : 'Показать пользователей'}</button>
+                    {showUsers && users.map(user =>
                         <div key={user.id}>{user.username}</div>)}
                     <RecipeForm/>
-                    <button onClick={getRecipes}>Получить список рецептов</button>
-                    {recipes.map(recipe =>
-                        <div key={recipe._id}>{recipe.title} <button onClick={() => recipestore.DeleteRecipe(recipe._id)}>Удалить</button></div>)}
+                    <button onClick={async () => {
+                        if(!showRecipes){
+                            await getRecipes()
+                        }
+                        setShowRecipes(prev => !prev)
+                    }}>{showRecipes ? 'Скрыть список рецептов' : 'Показать список рецептов'}</button>
+                    {showRecipes && recipes.map(recipe =>
+                        <div key={recipe._id}>{recipe.title} 
+                        <button onClick={() => recipestore.DeleteRecipe(recipe._id)}>Удалить</button>
+                        </div>)}
                 </div>
             </div>
         </div>

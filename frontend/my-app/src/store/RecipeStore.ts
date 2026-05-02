@@ -31,7 +31,7 @@ export default class RecipeStore{
         }
     }
 
-    async UpdateRecipe(id: string, data:string){
+    async UpdateRecipe(id: string, data: Partial<IRecipe>){
         try{
             const response = await RecipeService.UpdateRecipe(id, data)
             console.log(response)
