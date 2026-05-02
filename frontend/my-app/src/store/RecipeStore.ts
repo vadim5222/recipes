@@ -1,5 +1,4 @@
 import { makeAutoObservable, makeObservable } from "mobx";
-import axios from "axios";
 import { IRecipe } from "../models/IRecipe";
 import RecipeService from "../services/RecipeService";
 
@@ -42,7 +41,7 @@ export default class RecipeStore{
         }
     }
 
-    async getOneRecipe(id){
+    async getOneRecipe(id: string){
         try{
             const response = await RecipeService.getOneRecipe(id)
             console.log(response)
@@ -50,6 +49,7 @@ export default class RecipeStore{
             console.log(e.response?.data?.message)
         }
     }
+
     
 
 }

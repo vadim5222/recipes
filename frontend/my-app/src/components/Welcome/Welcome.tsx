@@ -4,7 +4,6 @@ import { IUser } from "../../models/IUser";
 import {IRecipe} from "../../models/IRecipe";
 import UserService from "../../services/UserService";
 import { observer } from 'mobx-react-lite';
-import { Link } from 'react-router-dom';
 import RecipeForm from "../RecipeForm/RecipeForm";
 import RecipeService from "../../services/RecipeService";
 
